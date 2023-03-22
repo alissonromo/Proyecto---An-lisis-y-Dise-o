@@ -1,0 +1,52 @@
+<div class="contenedor">
+    <h1>Dashboard</h1>
+    <mat-divider></mat-divider>
+    <div>
+        <h2>Sistema de averias</h2>
+        <div>
+            <label>Año:</label>
+            <mat-form-field appearance="fill">
+                <mat-select  name="anno" ngModel (ngModelChange)='buscarAnno($event)'>
+                    <mat-option *ngFor="let anno of dataAnnoSelect" [value]="anno">
+                        {{anno}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="grafico">
+        <h2>Cantidad de avería por años</h2>
+        <ngx-charts-line-chart [view]="view" [scheme]="colorScheme" [legend]="legend" [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel" [xAxis]="xAxis" [yAxis]="yAxis" [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel" [timeline]="timeline" [results]="dataAnno">
+        </ngx-charts-line-chart>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="grafico">
+        <h2>Tipo de avería del año {{this.annoSelect}}</h2>
+        <ngx-charts-advanced-pie-chart [view]="view2" [scheme]="colorScheme2" [results]="dataTipo" [gradient]="gradient">
+        </ngx-charts-advanced-pie-chart>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="grafico">
+        <h2>Estado de avería del año {{this.annoSelect}}</h2>
+        <ngx-charts-advanced-pie-chart [view]="view2" [scheme]="colorScheme2" [results]="dataEstado"
+            [gradient]="gradient">
+        </ngx-charts-advanced-pie-chart>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="grafico">
+        <h2>Avería por Edificio del año {{this.annoSelect}}</h2>
+        <ngx-charts-advanced-pie-chart [view]="view2" [scheme]="colorScheme2" [results]="dataEdificio"
+            [gradient]="gradient">
+        </ngx-charts-advanced-pie-chart>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="grafico">
+        <h2>Avería por Oficina del año {{this.annoSelect}}</h2>
+        <ngx-charts-advanced-pie-chart [view]="view2" [scheme]="colorScheme2" [results]="dataOficina"
+            [gradient]="gradient">
+        </ngx-charts-advanced-pie-chart>
+    </div>
+</div>

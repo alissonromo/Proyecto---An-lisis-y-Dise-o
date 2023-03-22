@@ -1,0 +1,13 @@
+.reportes-table{
+    width: 95%;
+    margin-left: 2em;
+}
+
+  mat-paginator{
+    width: 95%;
+    margin-left: 2.4em;
+  }
+
+  .button{
+    margin: 1em;
+  }

@@ -1,0 +1,51 @@
+.general {
+    display: flex;
+    flex-direction: row;
+    min-width: 150px;
+    max-width: 900px;
+    width: 100%;
+  }
+  
+  .child {
+    padding: 1em;
+  }
+
+  .childDescripcion {
+    padding: 1em;
+   
+  }
+
+  .Descripcion{
+    height: 7em;
+  }
+
+  .Comentario{
+    height: 6em;
+   
+  }
+
+  table {
+    width: 95%;
+    margin-left: 2em;
+  }
+  
+  mat-paginator{
+    width: 47%;
+    margin-left: 2.4em;
+  }
+  
+  .generalTabla {
+    display: flex;
+    flex-direction: row;
+    min-width: 150px;
+    max-width: 900px;
+    width: 50%;
+  }
+
+  .divTramitado{
+    margin: 0.5em;
+  }
+
+  .divAsignado{
+    margin: 0.5em;
+  }

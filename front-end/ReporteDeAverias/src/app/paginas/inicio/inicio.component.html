@@ -1,0 +1,89 @@
+<mat-toolbar class="mat-elevation-z8">
+  <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+    <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+    <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+  </button>
+<div>
+    <h4 class="name">{{this.Rol}}</h4>
+</div>
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+    <img class="avatar mat-elevation-z8" src="https://th.bing.com/th/id/R.b1bf5f22cbd25102ec92c0895dcf1527?rik=x%2bPqqpRiBiMjyQ&riu=http%3a%2f%2fobservatorio.mj.go.cr%2fsites%2fdefault%2ffiles%2fplaca-md.png&ehk=IqBbw8266FLRcLsRO%2bqKPrWvC0aazR%2bI7PBpB9DH9d4%3d&risl=&pid=ImgRaw&r=0%22/%3E" />
+    <h4 class="name">{{this.UserName}}</h4>
+    <mat-divider></mat-divider>
+    <div>
+      <button mat-button class="menu-button" routerLink="/inicio/crearreporte">
+        <mat-icon>home</mat-icon>
+        <span>Inicio</span>
+      </button>
+      <div class="sub">
+        <button mat-button class="menu-button" routerLink="/inicio/crearreporte">
+          <mat-icon>build</mat-icon>
+          <span>Crear Reporte</span>
+        </button>
+        <button mat-button class="menu-button" routerLink="/inicio/consultareportes">
+          <mat-icon>find_in_page</mat-icon>
+          <span>Consulta Avería</span>
+        </button>
+      </div>
+    </div>
+
+    <div>
+      <div>
+        <button mat-button class="menu-button" routerLink="/inicio/misreportes">
+          <mat-icon>timeline</mat-icon>
+          <span>Estadísticas</span>
+        </button>
+        <div class="sub">
+          <div
+            *ngIf="DatosAdministradorEdificio || DatosUsuario || DatosAdministrador || DatosJefeTecnico || DatosTecnico">
+            <button mat-button class="menu-button" routerLink="/inicio/misreportes">
+              <mat-icon>find_in_page</mat-icon>
+              <span>Mis Reportes</span>
+            </button>
+            <button mat-button class="menu-button" routerLink="/inicio/tramitadotecnico">
+              <mat-icon>person_pin</mat-icon>
+              <span>Tramitados por Técnicos</span>
+            </button>
+          </div>
+          <div *ngIf="DatosAdministrador || DatosTecnico">
+            <button mat-button class="menu-button" routerLink="/inicio/hojatrabajo">
+              <mat-icon>collections_bookmark</mat-icon>
+              <span>Hoja de Trabajo</span>
+            </button>
+            <button mat-button class="menu-button" routerLink="/inicio/dashboard">
+              <mat-icon>pie_chart</mat-icon>
+              <span>Dashboard</span>
+            </button>
+          </div>
+        </div>
+
+        <div *ngIf="DatosAdministrador">
+        <button mat-button class="menu-button" routerLink="/inicio/edificio">
+          <mat-icon>settings</mat-icon>
+          <span>Catálogos</span>
+        </button>
+      </div>
+        <mat-divider></mat-divider>
+
+        <button mat-button class="menu-button" (click)="openNewTab()">
+          <mat-icon>help</mat-icon>
+          <span>Ayuda</span>
+        </button>
+        <button mat-button class="menu-button" (click)="cerrarSesion()">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Cerrar Sesión</span>
+        </button>
+      </div>
+    </div>
+
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

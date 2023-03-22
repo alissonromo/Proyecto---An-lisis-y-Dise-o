@@ -1,0 +1,48 @@
+.c-form {
+  min-width: 150px;
+  max-width: 800px;
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.general{
+  display: flex;
+  flex-direction: row;
+}
+
+.child{
+  padding: 2em;
+}
+
+table {
+  width: 95%;
+  margin-left: 2em;
+}
+
+mat-paginator{
+  width: 95%;
+  margin-left: 2.4em;
+}
+
+.button-table{
+  margin: 0.5em;
+}
+
+.limpiar{
+  background-color: yellow;
+}
+
+.button{
+  width: auto;
+  height: 4em;
+  margin: 1em;
+  margin-top: 0.5em;
+}
+
+.Descripcion{
+  height: 8em;
+}
+

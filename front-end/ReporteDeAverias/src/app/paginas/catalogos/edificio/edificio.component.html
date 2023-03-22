@@ -1,0 +1,75 @@
+<app-menu-catalogo></app-menu-catalogo>
+<div>
+  <h2>
+    <mat-icon>dns</mat-icon>Edificios
+  </h2>
+  <div class="general">
+
+    <mat-form-field class="full-width child" appearance="fill">
+      <mat-label>Descripción</mat-label>
+      <input [(ngModel)]="nombre" matInput placeholder="Descripción" required>
+    </mat-form-field>
+    <button mat-raised-button (click)="registrarEdificio()" color="primary" class="button">
+      <mat-icon>save</mat-icon>
+      Guardar
+    </button>
+
+    <button mat-raised-button (click)="limpiar()" class="limpiar button">
+      <mat-icon>cleaning_services</mat-icon>
+      Limpiar
+    </button>
+
+  </div>
+  <mat-divider></mat-divider>
+
+  <div>
+    <h2>
+      <mat-icon>dns</mat-icon>Edificios Registrados
+    </h2>
+    <div class="general">
+      <mat-form-field class="child" appearance="fill">
+        <mat-label>Buscar</mat-label>
+        <input [ngModel]="buscar" (ngModelChange)='buscarEdificio($event)' matInput placeholder="Ingrese una palabra">
+      </mat-form-field>
+
+    </div>
+    <div>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID </th>
+          <td mat-cell *matCellDef="let element"> {{element.tN_ID}} </td>
+        </ng-container>
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef> Descripción </th>
+          <td mat-cell *matCellDef="let element"> {{element.tC_Nombre}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef style="text-align:center"> Acción </th>
+          <td mat-cell *matCellDef="let element">
+
+            <button mat-stroked-button class="button-table" color="accent"
+              (click)="opcionModificar(element.tN_ID, element.tC_Nombre)">Editar</button>
+            <button mat-raised-button type="button" class="mat-warn button-table"
+              (click)="dialogoEliminar(element.tN_ID)">
+              <mat-icon>delete</mat-icon>
+              Eliminar
+            </button>
+
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </div>
+  </div>
+
+</div>

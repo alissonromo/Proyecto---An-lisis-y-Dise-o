@@ -1,0 +1,6 @@
+.grafico{
+    display:inline-block;
+}
+::ng-deep .advanced-pie-legend ::ng-deep .legend-items-container ::ng-deep .legend-items ::ng-deep .legend-item ::ng-deep .item-value {
+    margin-top: 10px !important;
+}

@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\back-end",
+    "\\back-end\\RDAAccesoADatos",
+    "\\back-end\\RDAAccesoADatos\\Data",
+    "\\back-end\\RDAEntidades",
+    "\\back-end\\RDAEntidades\\Entities",
+    "\\back-end\\RDAReglasDeNegocio",
+    "\\back-end\\RDAReglasDeNegocio\\Business",
+    "\\back-end\\ReporteDeAverias",
+    "\\back-end\\ReporteDeAverias\\Controllers"
+  ],
+  "SelectedNode": "\\back-end\\RDAAccesoADatos\\Data\\DataReporte.cs",
+  "PreviewInSolutionExplorer": false
+}

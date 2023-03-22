@@ -1,0 +1,32 @@
+
+.general{
+  display: flex;
+  flex-direction: row;
+  margin: 1em;
+}
+
+.child{
+  padding: 1em;
+}
+
+table {
+  width: 95%;
+  margin-left: 2em;
+  }
+
+.button-table{
+  margin: 1rem;
+}
+
+.button-buscar{
+  width: auto;
+  height: 4em;
+  margin: 1em;
+  margin-top: 1em;
+}
+
+mat-paginator{
+  width: 95%;
+  margin-left: 2.4em;
+}
+

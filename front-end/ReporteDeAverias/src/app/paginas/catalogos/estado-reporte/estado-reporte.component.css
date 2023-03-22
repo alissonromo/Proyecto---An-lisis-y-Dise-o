@@ -1,0 +1,32 @@
+
+.general{
+  display: flex;
+  flex-direction: row;
+}
+
+.child{
+  padding: 1em;
+}
+
+table {
+  width: 50%;
+  margin-left: 2em;
+}
+mat-paginator{
+  width: 50%;
+  margin-left: 2.4em;
+}
+
+.button-table{
+  margin: 0.5em;
+}
+.button{
+  width: auto;
+  height: 4em;
+  margin: 1em;
+  margin-top: 2em;
+}
+
+.limpiar{
+  background-color: yellow;
+}

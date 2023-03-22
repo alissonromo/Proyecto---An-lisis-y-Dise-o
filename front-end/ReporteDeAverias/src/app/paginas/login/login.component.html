@@ -1,0 +1,26 @@
+<mat-card class="card">
+  <mat-card-title style="background-color: lightgray; padding: 1em; border-radius: 5%;">Ingreso al sistema
+  </mat-card-title>
+  <mat-card-content>
+    <div style="margin-top: 2em;">
+      <img mat-card-image  class="imagen" src="https://sitiooij.poder-judicial.go.cr/images/placa-lg.png">
+    </div>
+    <form>
+      <p>
+        <mat-form-field class="forms" appearance="fill">
+          <mat-label>Usuario</mat-label>
+          <input [(ngModel)]="nombre" name="nombre" matInput placeholder="Usuario">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="forms" appearance="fill">
+          <mat-label>Contraseña</mat-label>
+          <input type="password" [(ngModel)]="contra" name="contra" matInput placeholder="Contraseña">
+        </mat-form-field>
+      </p>
+      <button mat-raised-button (click)="buttonInicioSesion()" color="primary" class="limpiar">
+        Iniciar
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>

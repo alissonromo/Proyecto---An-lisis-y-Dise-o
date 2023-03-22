@@ -1,0 +1,221 @@
+<app-menu-catalogo></app-menu-catalogo>
+<div>
+  <h2>
+    <mat-icon>dns</mat-icon>Funcionarios
+  </h2>
+  <form #formularioFuncionario="ngForm" (ngSubmit)="registrarFuncionario()">
+    <div class="general">
+      <div class="child">
+        <mat-form-field appearance="fill" class="m-1">
+          <mat-label>Nombre</mat-label>
+          <input [(ngModel)]="funcionario.Nombre" matInput placeholder="Nombre" name="nombre" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="m-1">
+          <mat-label>Primer Apellido</mat-label>
+          <input [(ngModel)]="funcionario.PrimerApellido" matInput placeholder="Primer Apellido" name="primerApellido"
+            required>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="m-1">
+          <mat-label>Segundo Apellido</mat-label>
+          <input [(ngModel)]="funcionario.SegundoApellido" matInput placeholder="Segundo Apellido"
+            name="segundoApellido" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="m-1">
+          <mat-label>Cédula</mat-label>
+          <input [(ngModel)]="funcionario.Identificacion" matInput placeholder="Ejm. 304680876" name="identificacion"
+            [disabled]="desactivar" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="m-1">
+          <mat-label>Correo</mat-label>
+          <input [(ngModel)]="funcionario.Correo" matInput placeholder="Correo" name="correo" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="m-1">
+          <mat-label>Usuario</mat-label>
+          <input [(ngModel)]="funcionario.Usuario" matInput placeholder="Usuario" name="usuario" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="m-1">
+          <mat-label>Contraseña</mat-label>
+          <input [(ngModel)]="funcionario.Contrasenna" matInput type="Password" placeholder="Contraseña"
+            name="contrasena" [disabled]="desactivar" required>
+        </mat-form-field>
+
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="divRol">
+      <h3>
+        <mat-icon>dns</mat-icon>Administrador de roles
+      </h3>
+      <form class="general" (ngSubmit)="agregarOficinaRol()">
+        <h4 class="mt-4">Lista de Oficinas</h4>
+        <mat-form-field appearance="fill" class="m-3">
+          <mat-label>Seleccione una oficina</mat-label>
+          <mat-select [(ngModel)]="selectedOficina" name="oficina" required>
+            <mat-option *ngFor="let oficina of dataOficinas" [value]="oficina">
+              {{oficina.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <h4 class="mt-4">Lista de Roles</h4>
+        <mat-form-field appearance="fill" class="m-3">
+          <mat-label>Seleccione un rol</mat-label>
+          <mat-select [(ngModel)]="selectedRol" name="rol" required>
+            <mat-option *ngFor="let rol of dataRol" [value]="rol">
+              {{rol.TC_Nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-raised-button color="primary" class="button" type="submit" [disabled]="desactivar">
+          <mat-icon>add_box</mat-icon>
+          Agregar
+        </button>
+      </form>
+
+      <table mat-table [dataSource]="dataSourceRolOficiona" class="mat-elevation-z8 tableE">
+        <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+        <ng-container matColumnDef="oficina">
+          <th mat-header-cell *matHeaderCellDef> Oficina </th>
+          <td mat-cell *matCellDef="let element"> {{element.TC_Nombre_Oficina}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="rol">
+          <th mat-header-cell *matHeaderCellDef> Rol </th>
+          <td mat-cell *matCellDef="let element"> {{element.TC_Nombre_Rol}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef style="text-align:center"> Acción </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-raised-button type="button" class="mat-warn button-table" (click)="removerRol(element.TN_ID_Rol,element.TN_ID_Oficina)">
+              <mat-icon>delete</mat-icon>
+              Eliminar
+            </button>
+
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsRolOficiona"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsRolOficiona;"></tr>
+      </table>
+
+    </div>
+    <br>
+    <mat-divider></mat-divider>
+
+    <div class="divEdificio">
+      <h3>
+        <mat-icon>dns</mat-icon>Administrador de edificios
+      </h3>
+      <form class="general" (ngSubmit)="agregarEdificios()">
+        <h4 class="mt-4">Lista de edificios</h4>
+        <mat-form-field appearance="fill" class="m-3">
+          <mat-label>Seleccione una edificio</mat-label>
+          <mat-select [(ngModel)]="selectedEdificio" name="oficina" required>
+            <mat-option *ngFor="let edificio of listEdificios" [value]="edificio">
+              {{edificio.tC_Nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-raised-button color="primary" class="button" type="submit" [disabled]="desactivar">
+          <mat-icon>add_box</mat-icon>
+          Agregar
+        </button>
+      </form>
+
+      <table mat-table [dataSource]="dataSourceEdificio" class="mat-elevation-z8 tableE">
+        <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef> Nombre </th>
+          <td mat-cell *matCellDef="let element"> {{element.TC_Nombre}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef style="text-align:center"> Acción </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-raised-button type="button" class="mat-warn button-table" (click)="removerEdificio(element.TN_ID)">
+              <mat-icon>delete</mat-icon>
+              Eliminar
+            </button>
+
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsEdificio"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsEdificio;"></tr>
+      </table>
+
+    </div>
+    <br>
+    <mat-divider></mat-divider>
+
+    <button mat-raised-button color="primary" class="button mt-4" type="submit">
+      <mat-icon>save</mat-icon>
+      Guardar
+    </button>
+    <button mat-raised-button type="button" class="limpiar button" (click)="limpiar()">
+      <mat-icon>cleaning_services</mat-icon>
+      Limpiar
+    </button>
+  </form>
+
+  <mat-divider></mat-divider>
+
+  <div>
+    <h2 class="mt-5">
+      <mat-icon>dns</mat-icon>Funcionarios Registrados
+    </h2>
+    <div class="general">
+      <mat-form-field class="child" appearance="fill">
+        <mat-label>Buscar</mat-label>
+        <input [ngModel]="buscar" (ngModelChange)='buscarEdificio($event)' matInput placeholder="Ingrese una palabra">
+      </mat-form-field>
+    </div>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+      <ng-container matColumnDef="tecnico">
+        <th mat-header-cell *matHeaderCellDef> Usuario </th>
+        <td mat-cell *matCellDef="let element"> {{element.rol}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef> Nombre Complete </th>
+        <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="correo">
+        <th mat-header-cell *matHeaderCellDef> Correo </th>
+        <td mat-cell *matCellDef="let element"> {{element.correo}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="usuario">
+        <th mat-header-cell *matHeaderCellDef> Usuario </th>
+        <td mat-cell *matCellDef="let element"> {{element.usuario}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef style="text-align:center"> Acción </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-stroked-button class="button-table" color="accent" (click)="opcionModificar(element.id,element.nombre,element.primerApellido,
+            element.segundoApellido,element.identificacion,element.usuario,element.correo)">Editar</button>
+          <button mat-raised-button type="button" class="mat-warn button-table" (click)="dialogoEliminar(element.id,element.rolId,element.oficinaId)">
+            <mat-icon>delete</mat-icon>
+            Eliminar
+          </button>
+
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+    </mat-paginator>
+  </div>
+</div>

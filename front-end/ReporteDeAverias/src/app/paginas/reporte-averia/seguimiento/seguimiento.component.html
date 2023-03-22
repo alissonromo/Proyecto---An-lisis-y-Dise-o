@@ -1,0 +1,202 @@
+<div>
+    <h1>Seguimiento de reporte</h1>
+    <mat-divider></mat-divider>
+    <div class="general">
+        <div class="child">
+        <mat-form-field appearance="fill" class="m-1">
+            <mat-label>Número de reporte</mat-label>
+            <input [(ngModel)]="numeroReporte" matInput placeholder="ID" required disabled="true">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="m-1">
+            <mat-label >Oficina</mat-label>
+            <input [(ngModel)]="oficina" matInput placeholder="Oficina" required disabled="true">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="m-1">
+            <mat-label>Edificio</mat-label>
+            <input [(ngModel)]="edificio" matInput placeholder="Edificio" required disabled="true">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="m-1">
+            <mat-label>Email funcionario</mat-label>
+            <input matInput [(ngModel)]="correo" disabled="true">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="m-1">
+            <mat-label>Tipo de Reporte</mat-label>
+            <mat-select [(ngModel)]="tipo" name="tipoReporte">
+                <mat-option *ngFor="let tipoReporte of dataTipoReporte" [value]="tipoReporte.tC_Nombre">
+                  {{tipoReporte.tC_Nombre}}
+                </mat-option>
+              </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="m-1">
+            <mat-label>Estado de reporte</mat-label>
+            <mat-select [(ngModel)]="estadoReporte" name="estadoReporte" required="true">
+                <mat-option *ngFor="let estadoReporte of dataEstadoReporte" [value]="estadoReporte.tC_Nombre" (click)="cargarTramitados()">
+                  {{estadoReporte.tC_Nombre}}
+                </mat-option>
+              </mat-select>
+        </mat-form-field>
+
+        </div>
+        <div class="childDescripcion">
+            <mat-form-field appearance="fill" class="m-1">
+                <mat-label>Descripción</mat-label>
+                <textarea class="Descripcion" matInput [(ngModel)]="descripcion" disabled="true"></textarea>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="general">
+        <mat-expansion-panel *ngIf="ocultarTramite" hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>Tramitado</mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-form-field appearance="fill" class="divTramitado">
+                <mat-label>Monto de materiales</mat-label>
+                <input type="number" min="0" [(ngModel)]="montoMatriales" name="montoMatriales" matInput>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="divTramitado">
+                <mat-label>Cantidad de tareas</mat-label>
+                <input type="number" min="0" [(ngModel)]="cantidadTareas" name="cantidadTareas" matInput>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="divTramitado">
+                <mat-label>Horas</mat-label>
+                <input type="number" min="0" [(ngModel)]="horas" name="horas" matInput>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="divTramitado">
+                <mat-label>Minutos</mat-label>
+                <input type="number" min="0" max="59" [(ngModel)]="minutos" name="minutos" matInput>
+                <mat-error ng-show="myForm.user.$error.max">
+                    Valor menor a 60 min.
+                  </mat-error>
+            </mat-form-field>
+        </mat-expansion-panel>
+    </div>
+    <div class="general">
+        <mat-expansion-panel hideToggle *ngIf="ocultarTecnicos">
+            <mat-expansion-panel-header>
+                <mat-panel-title>Tecnicos</mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-form-field appearance="fill" class="divAsignado">
+                <mat-label>Técnicos</mat-label>
+                <mat-select [(ngModel)]="tecnico" name="tecnico">
+                    <mat-option *ngFor="let tecnico of dataUsuarioRol" [value]="tecnico">
+                  {{tecnico.nombre+' '+tecnico.primerApellido+' '+tecnico.segundoApellido}}
+                </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button mat-raised-button type="button" color="primary" title="Guardar" (click)="agregarFuncionario()">
+                <mat-icon>save</mat-icon>
+                Guardar
+            </button>
+            <mat-divider></mat-divider>
+
+            <div>
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                    <ng-container matColumnDef="nombre">
+                        <th mat-header-cell *matHeaderCellDef> Nombre</th>
+                        <td mat-cell *matCellDef="let element"> {{element.TC_Nombre + ' '+ element.TC_PrimerApellido+ ' '+ element.TC_SegundoApellido}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="acciones">
+                        <th mat-header-cell *matHeaderCellDef style="text-align:center"> Acción </th>
+                        <td mat-cell *matCellDef="let j = index">
+                            <button mat-raised-button type="button" class="mat-warn button-table" (click)="eliminarFuncionario(j)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </div>
+        </mat-expansion-panel>
+
+    </div>
+
+
+    <div class="general">
+        <div class="child">
+        <div>
+            <mat-form-field appearance="fill" class="m-1">
+                <mat-label>Prioridad</mat-label>
+                <mat-select [(ngModel)]="prioridad" name="prioridad">
+                    <mat-option *ngFor="let prioridad of dataPrioridad" [value]="prioridad.tC_Nombre">
+                      {{prioridad.tC_Nombre}}
+                    </mat-option>
+                  </mat-select>
+            </mat-form-field>
+            <mat-checkbox class="example-margin" [(ngModel)]="comentarioPublico" name="comentarioPublico" class="m-1">
+                Comentario Público
+            </mat-checkbox>
+
+        </div>
+        <div class="general">
+            <div class="m-4">
+            <button mat-raised-button type="button" class="mat-warn" (click)="limpiar()">
+                <mat-icon>delete</mat-icon>
+                Limpiar
+            </button>
+        </div>
+        <div class="m-4">
+            <button mat-raised-button type="button"  color="primary" title="Guardar" (click)="guardarSeguimiento()">
+                <mat-icon>save</mat-icon>
+                Guardar
+            </button>
+        </div>
+        </div>
+    </div>
+    <div class="child">
+        <mat-form-field appearance="fill" class="m-4">
+            <mat-label>Comentario</mat-label>
+            <textarea matInput class="Comentario"
+            [ngModel]="comentario"
+             placeholder="Comment"
+             [formControl]="commentFC">
+           </textarea>
+           <mat-error *ngIf="commentFC.hasError('maxlength')">
+             Max length is 30.
+           </mat-error>
+        </mat-form-field>
+    </div>
+    </div>
+
+
+    <mat-divider></mat-divider>
+
+    <div >
+        <h2>Lista Estado Reporte</h2>
+        <mat-form-field class="child" appearance="fill">
+            <mat-label>Buscar</mat-label>
+            <input [ngModel]="buscar" (ngModelChange)='buscarReporteComentario($event)' matInput placeholder="Ingrese una palabra">
+          </mat-form-field>
+<div class="generalTabla">
+        <table mat-table [dataSource]="dataSource2" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="estado">
+                <th mat-header-cell *matHeaderCellDef> Estado</th>
+                <td mat-cell *matCellDef="let element"> {{element.nombreEstado}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="funcionario">
+                <th mat-header-cell *matHeaderCellDef>Funcionario</th>
+                <td mat-cell *matCellDef="let element"> {{element.nombreUsuario}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="comentario">
+                <th mat-header-cell *matHeaderCellDef> Comentario</th>
+                <td mat-cell *matCellDef="let element"> {{element.comentario}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="fecha">
+                <th mat-header-cell *matHeaderCellDef> Fecha</th>
+                <td mat-cell *matCellDef="let element"> {{element.fechaInicio | date:'dd/MM/yyyy, h:mm a'}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns2"></tr>
+        </table>
+
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+    </mat-paginator>
+    </div>
+</div>

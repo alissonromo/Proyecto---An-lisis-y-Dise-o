@@ -1,0 +1,16 @@
+<div class="oficina">
+  <h2>Favor seleccionar la oficina en la que desea trabajar</h2>
+      <mat-form-field appearance="fill" >
+        <mat-label>Seleccione una oficina</mat-label>
+        <mat-select  [(ngModel)]="combo" name="oficina">
+          <mat-option *ngFor="let oficina of datoOficinas" [value]="oficina.nombre">
+            {{oficina.nombre}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button (click)="buttonOficina()" class="limpiar button" color="primary">
+        Ingresar
+      </button>
+</div>
+
+

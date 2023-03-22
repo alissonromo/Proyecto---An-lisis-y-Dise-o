@@ -1,0 +1,54 @@
+:host {
+  display: flex;
+  justify-content: center;
+  margin: 7em 0em;
+}
+.forms{
+  width: 100%;
+}
+
+mat-card-title,
+mat-card-content {
+  display: flex;
+  justify-content: center;
+  min-width: 5em;
+ }
+
+.error {
+  padding: 16px;
+  width: 300px;
+  color: white;
+  background-color: red;
+}
+
+
+.limpiar{
+  width: 100%;
+  justify-content: center;
+}
+
+.imagen{
+  margin-right: 5em;
+  height: 15em;
+}
+
+body{
+  background-image: url('https://p4.wallpaperbetter.com/wallpaper/761/546/510/blue-gradient-abstract-wallpaper-preview.jpg');
+  color: #FFFFFF;
+}
+
+.card{
+  min-width: 20em;
+ }
+
+@media only screen and (min-width: 320px) and (max-width: 576px) {
+
+  .forms{
+    width: 75%;
+  }
+  .limpiar{
+    width: 75%;
+    justify-content: center;
+  }
+
+}
